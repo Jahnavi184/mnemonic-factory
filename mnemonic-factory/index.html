@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mnemonic Factory</title>
+  <script>
+    // Apply dark theme before paint to avoid flash
+    (function() {
+      const saved = localStorage.getItem('mnemo_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <span class="nav-logo">⚙️</span>
+      <span class="nav-title">Mnemonic Factory</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" data-page="generate">Generate</button>
+      <button class="nav-btn" data-page="saved">Saved</button>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <!-- PAGES -->
+  <main>
+
+    <!-- GENERATE PAGE -->
+    <section id="page-generate" class="page active">
+      <div class="hero">
+        <h1 class="hero-title">Turn any list into<br><span class="gradient-text">something unforgettable.</span></h1>
+        <p class="hero-sub">Speak or type a list — get a story, acronym, and rhyme instantly.</p>
+      </div>
+
+      <div class="input-area">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="topic-input"
+            class="topic-input"
+            placeholder="e.g. seven layers of OSI, planets in order, steps of mitosis…"
+            autocomplete="off"
+          />
+          <button id="generate-btn" class="generate-btn">
+            <span id="btn-text">Generate</span>
+            <span id="btn-spinner" class="spinner hidden"></span>
+          </button>
+        </div>
+        <div class="input-hint">
+          <span class="mic-icon">🎙️</span>
+          <div class="hint-text">
+            <strong class="hint-bold">Don't type it. Say it.</strong>
+            <span class="hint-small">Hold your Wispr Flow key and read out your list, or just paste it.</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="cards-area" class="cards-area hidden">
+        <div class="cards-grid">
+
+          <div class="card card--story" id="card-story">
+            <div class="card-header">
+              <span class="card-icon">📖</span>
+              <span class="card-type">Vivid Story</span>
+            </div>
+            <p class="card-body" id="story-text"></p>
+            <p class="coverage-warning hidden" id="story-warning"></p>
+            <div class="card-actions">
+              <button class="one-sticks-btn" data-type="story">★ One Sticks</button>
+              <button class="try-another-btn" data-type="story">↺ Try another</button>
+            </div>
+          </div>
+
+          <div class="card card--acronym" id="card-acronym">
+            <div class="card-header">
+              <span class="card-icon">🔤</span>
+              <span class="card-type">Acronym</span>
+            </div>
+            <p class="card-body" id="acronym-text"></p>
+            <div class="card-actions">
+              <button class="one-sticks-btn" data-type="acronym">★ One Sticks</button>
+              <button class="try-another-btn" data-type="acronym">↺ Try another</button>
+            </div>
+          </div>
+
+          <div class="card card--rhyme" id="card-rhyme">
+            <div class="card-header">
+              <span class="card-icon">🎵</span>
+              <span class="card-type">Rhyme</span>
+            </div>
+            <p class="card-body" id="rhyme-text"></p>
+            <p class="coverage-warning hidden" id="rhyme-warning"></p>
+            <div class="card-actions">
+              <button class="one-sticks-btn" data-type="rhyme">★ One Sticks</button>
+              <button class="try-another-btn" data-type="rhyme">↺ Try another</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SAVED PAGE -->
+    <section id="page-saved" class="page">
+      <div class="page-header">
+        <h2 class="page-title">Saved Mnemonics</h2>
+        <p class="page-sub">Your personal collection of sticky memories.</p>
+      </div>
+      <div id="saved-list" class="saved-list"></div>
+    </section>
+
+    <!-- QUIZ PAGE -->
+    <section id="page-quiz" class="page">
+      <!-- dynamically injected -->
+    </section>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
